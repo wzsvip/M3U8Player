@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>在线视频播放器</title>
+    <link rel="stylesheet" href="https://g.alicdn.com/apsara-media-box/imp-web-player/2.26.2/skins/default/aliplayer-min.css" />
+    <link rel="stylesheet" href="https://g.alicdn.com/AliYunVideoWebClient/Detection/0.0.3/assets/css/style.css?6c5d4737b7ec29554264" />
+        <script type="text/javascript" src="https://g.alicdn.com/apsara-media-box/imp-web-player/2.26.2/aliplayer-min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px; 
+            box-sizing: border-box;
+            background-color: #000;
+        }
+
+        .prism-player {
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<div class="prism-player" id="J_prismPlayer" style="width: 100%; position: absolute;left:0%;margin: 0 auto;"></div>
+
+<script>
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    var sourceUrl = getQueryParam('source') || "https://wzi.me/?/mv/playlist.mp4";
+
+    // 创建一个新的视频元素，用于测试链接的有效性
+    var videoTest = document.createElement('video');
+    videoTest.src = sourceUrl;
+    
+    videoTest.addEventListener('error', function() {
+        // 链接404时自动返回主页面video.html
+        window.location.href = "video.html";
+    });
+
+    // 尝试加载视频
+    videoTest.load();
+
+    var player = new Aliplayer({
+        id: "J_prismPlayer",
+        autoplay: true,
+        playsinline: true,
+        width: "100%",
+        height: "400px",
+        controlBarVisibility: "always",
+        useH5Prism: false,
+        useFlashPrism: false,
+        source: sourceUrl,
+        cover: ""
+    });
+</script>
+</body>
+</html>
