@@ -1,0 +1,24 @@
+<script language="javascript">
+var vid = location.href.split('html?id=')[1];
+var ch = [];
+ch['hbws']  = '157';//湖北卫视
+ch['hbzh']  = '165';//湖北综合
+ch['hbgg']  = '169';//湖北公共新闻
+ch['hbjs']  = '161';//湖北经视
+ch['hbjy']  = '153';//湖北教育
+ch['hbls']  = '181';//湖北垄上
+ch['hbsh']  = '177';//湖北生活
+ch['hbys']  = '173';//湖北影视
+ch['xxzn']  = '183';//湖北休闲指南
+ch['mjgw']  = '35';//湖北美嘉购物
+var url = 'http://app.cjyun.org/video/player/stream?stream_id='+ch[vid]+'&site_id=10008';
+hbtv = new XMLHttpRequest()
+hbtv.open("get", url, true);
+hbtv.send();
+hbtv.onreadystatechange = function() {
+     data = hbtv.responseText.replace(/\\/g,'');
+     var reg=/"stream" : "(.*?)"/;//除去:前后空格
+     m3u8 = data.match(reg)[1];
+     location.href = m3u8;//此处可添加播放器
+}
+</script>
