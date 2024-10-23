@@ -1,0 +1,42 @@
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="xxtea2.js"></script>
+<script>
+var idParam = location.href.split('?id=');
+if (idParam.length > 1) {
+    var id = idParam[1].split('&')[0];
+} else {
+    var id = 'jlws';
+}
+
+var channel = [];
+channel['jlws'] = 2;    //吉林卫视
+channel['jlds'] = 3;  //都市频道
+channel['jlsh'] = 4;  //生活频道
+channel['jlys'] = 5;  //影视频道
+channel['jlxc'] = 6;    //乡村频道
+channel['jlggxw'] = 7;  //公共·新闻频道
+channel['jlzywh'] = 8;    //综艺·文化频道
+channel['jldbxq'] = 9; //东北戏曲频道
+var url = 'https://clientapi.jlntv.cn/broadcast/list?page=1&size=10000&type=1';
+$.ajax({
+    contentType:'application/json',
+    type: 'GET',
+    url: url,
+    success: function(res) {
+        var shuju = XXTEA.decryptToString(res, "5b28bae827e651b3");
+		
+        var obj = JSON.parse(shuju);
+        var json =obj.data;
+       var cid = channel[id];
+       for (var Index in json) {
+       var pid = json[Index].data.id;
+        if (pid == cid) {
+        var m3u8 = json[Index].data.streamUrl;
+		//console.log(m3u8);
+        location.href = m3u8;
+           }
+
+        }
+    }
+});
+</script>
