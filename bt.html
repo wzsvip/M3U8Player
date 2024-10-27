@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动提取并搜索</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; /* 水平居中 */
+             /* 垂直居中 align-items: center;  */
+            height: 100vh; /* 视口高度 */
+            margin-top: -50px;
+            margin: 0; /* 移除默认边距 */
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .search-input {
+            flex-grow: 1;
+            height: 25px; /* 设置高度与按钮一致 */
+            padding: 5px;
+            border-radius: 15px;  /* 小圆角 */
+            border: 1px solid #ccc; /* 添加边框 */
+            margin-right: 2px; /* 右边距 */
+            outline: none; /* 移除默认的焦点轮廓 */
+        }
+        .search-btn {
+            padding: 5px 18px;
+            cursor: pointer;
+            white-space: nowrap; 
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            color: white; /* 字体颜色 */
+            height: 37px; /* 设置按钮高度与文本框一致 */
+            border: 1px solid #ccc; /* 添加边框 */
+            outline: none; /* 移除默认的焦点轮廓 */
+            border-radius: 5px;  /* 小圆角 */
+            background-color: #0672EF; /* 设置背景颜色 */
+        }
+        .search-btn:hover {
+            background-color: #5A81F9; /* 鼠标悬停时改变背景颜色 */
+        }
+    </style>
+    <script>
+        function extractAndSearch() {
+            const input = document.getElementById('searchInput').value;
+            const match = input.match(/https:\/\/jable\.tv\/videos\/([^\/]+)/);
+            if (match) {
+                const query = match[1];
+                const searchUrl = `https://0cili.top/search?q=${query}`;
+                window.open(searchUrl, '_blank');
+            } else {
+                alert('请输入有效的链接');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>自动提取并搜索</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="粘贴链接" onblur="extractAndSearch()">
+            <button class="search-btn" onclick="extractAndSearch()">Search</button>
+        </div>
+    </div>
+</body>
+</html>
