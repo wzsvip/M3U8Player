@@ -8,9 +8,8 @@
         body {
             display: flex;
             justify-content: center; /* 水平居中 */
-             /* 垂直居中 align-items: center;  */
+            align-items: center; /* 垂直居中 */
             height: 100vh; /* 视口高度 */
-            margin-top: -50px;
             margin: 0; /* 移除默认边距 */
         }
         .search-bar {
@@ -49,6 +48,15 @@
             justify-content: center;
         }
     </style>
+</head>
+<body>
+    <div class="container">
+        <h1>自动提取并搜索</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="粘贴链接">
+            <button class="search-btn" onclick="extractAndSearch()">搜索</button>
+        </div>
+    </div>
     <script>
         function extractAndSearch() {
             const input = document.getElementById('searchInput').value;
@@ -62,14 +70,5 @@
             }
         }
     </script>
-</head>
-<body>
-    <div class="container">
-        <h1>自动提取并搜索</h1>
-        <div class="search-bar">
-            <input type="text" id="searchInput" class="search-input" placeholder="粘贴链接" onblur="extractAndSearch()">
-            <button class="search-btn" onclick="extractAndSearch()">Search</button>
-        </div>
-    </div>
 </body>
 </html>
