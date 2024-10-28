@@ -8,8 +8,9 @@
         body {
             display: flex;
             justify-content: center; /* 水平居中 */
-            align-items: center; /* 垂直居中 */
+             /* 垂直居中 align-items: center;  */
             height: 100vh; /* 视口高度 */
+            margin-top: -50px;
             margin: 0; /* 移除默认边距 */
         }
         .search-bar {
@@ -48,27 +49,37 @@
             justify-content: center;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>自动提取并搜索</h1>
-        <div class="search-bar">
-            <input type="text" id="searchInput" class="search-input" placeholder="粘贴链接">
-            <button class="search-btn" onclick="extractAndSearch()">搜索</button>
-        </div>
-    </div>
     <script>
         function extractAndSearch() {
             const input = document.getElementById('searchInput').value;
             const match = input.match(/https:\/\/jable\.tv\/videos\/([^\/]+)/);
             if (match) {
                 const query = match[1];
-                const searchUrl = `https://0cili.top/search?q=${query}`;
-                window.open(searchUrl, '_blank');
+                const searchUrl = `bt.html?search=${encodeURIComponent(query)}`; // 构建目标URL
+                window.open(searchUrl, '_blank'); // 在新窗口打开
             } else {
                 alert('请输入有效的链接');
             }
         }
+
+        function handleSearchQuery() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search');
+            if (searchQuery) {
+                console.log('搜索内容:', searchQuery);
+            }
+        }
+
+        window.onload = handleSearchQuery; 
     </script>
+</head>
+<body>
+    <div class="container">
+        <h1>自动提取并搜索</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="粘贴链接" onblur="extractAndSearch()">
+            <button class="search-btn" onclick="extractAndSearch()">搜索</button>
+        </div>
+    </div>
 </body>
 </html>
