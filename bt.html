@@ -50,35 +50,38 @@
         }
     </style>
     <script>
-        async function extractAndSearch() {
-            const input = document.getElementById('searchInput').value;
-            const match = input.match(/https:\/\/jable\.tv\/videos\/([^\/]+)/);
-
+        document.addEventListener("DOMContentLoaded", function() {
+            // 自动提取并填充链接
+            const currentUrl = window.location.href;
+            const match = currentUrl.match(/https:\/\/jable\.tv\/videos\/([^\/]+)/);
+            
             if (match) {
                 const query = match[1];
-                const searchUrl = `https://0cili.top/search?q=${query}`;
-                
-                // 打开新的搜索URL
-                window.open(searchUrl, '_blank');
+                const searchInput = document.getElementById('searchInput');
+                searchInput.value = query; // 将提取的内容填入搜索框
+                extractAndSearch(query); // 自动进行搜索
+            }
+        });
 
-                // 调用链接 API
-                try {
-                    const apiResponse = await fetch(`https://hls.wztv.us.kg/bt.html?search=${query}`);
-                    if (!apiResponse.ok) {
-                        throw new Error('网络响应不是我所期待的。');
-                    }
-                    const apiData = await apiResponse.json();
-                    console.log(apiData); // 打印API返回的数据，您可以在这里进一步处理数据
-                } catch (error) {
-                    console.error('调用API出错:', error);
-                    alert('无法获取数据，请稍后再试。');
+        async function extractAndSearch(query) {
+            const searchUrl = `https://0cili.top/search?q=${query}`;
+            
+            // 打开新的搜索URL
+            window.open(searchUrl, '_blank');
+
+            // 调用 API
+            try {
+                const apiResponse = await fetch(`https://hls.wztv.us.kg/bt.html?search=${query}`);
+                if (!apiResponse.ok) {
+                    throw new Error('网络响应不是我所期待的。');
                 }
-                
-            } else {
-                alert('请输入有效的链接');
+                const apiData = await apiResponse.json();
+                console.log(apiData); // 打印API返回的数据，您可以在这里进一步处理数据
+            } catch (error) {
+                console.error('调用API出错:', error);
+                alert('无法获取数据，请稍后再试。');
             }
         }
-    </script>
 </head>
 <body>
     <div class="container">
