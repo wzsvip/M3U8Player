@@ -16,12 +16,14 @@
         .search-bar {
             display: flex;
             align-items: center;
+            height: 55px; 
             margin-bottom: 25px;
         }
         .search-input {
             flex-grow: 1;
             height: 25px; /* 设置高度与按钮一致 */
             padding: 5px;
+            width: 200px; /* 设置最大宽度 */
             border-radius: 15px;  /* 小圆角 */
             border: 1px solid #ccc; /* 添加边框 */
             margin-right: 2px; /* 右边距 */
@@ -33,7 +35,7 @@
             white-space: nowrap; 
             cursor: pointer; /* 鼠标悬停时显示指针 */
             color: white; /* 字体颜色 */
-            height: 37px; /* 设置按钮高度与文本框一致 */
+            height: 38px; /* 设置按钮高度与文本框一致 */
             border: 1px solid #ccc; /* 添加边框 */
             outline: none; /* 移除默认的焦点轮廓 */
             border-radius: 5px;  /* 小圆角 */
@@ -41,6 +43,10 @@
         }
         .search-btn:hover {
             background-color: #5A81F9; /* 鼠标悬停时改变背景颜色 */
+        }
+        .container {
+            text-align: center;
+            justify-content: center;
         }
     </style>
     <script>
@@ -61,7 +67,7 @@
     <div class="container">
         <h1>自动提取并搜索</h1>
         <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="粘贴链接" onblur="extractAndSearch()">
+            <input type="text" id="searchInput" class="search-input" placeholder="粘贴链接" onblur="extractAndSearch()">
             <button class="search-btn" onclick="extractAndSearch()">Search</button>
         </div>
     </div>
