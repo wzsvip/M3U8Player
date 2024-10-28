@@ -50,27 +50,25 @@
         }
     </style>
     <script>
-        function extractAndSearch() {
-            const input = document.getElementById('searchInput').value;
-            const match = input.match(/https:\/\/jable\.tv\/videos\/([^\/]+)/);
-            if (match) {
-                const query = match[1];
-                const searchUrl = `bt.html?search=${encodeURIComponent(query)}`; // 构建目标URL
-                window.open(searchUrl, '_blank'); // 在新窗口打开
-            } else {
-                alert('请输入有效的链接');
-            }
-        }
-
         function handleSearchQuery() {
             const urlParams = new URLSearchParams(window.location.search);
             const searchQuery = urlParams.get('search');
             if (searchQuery) {
-                console.log('搜索内容:', searchQuery);
+                // 调用搜索功能，并将结果展示
+                displaySearchResults(searchQuery);
             }
         }
 
-        window.onload = handleSearchQuery; 
+        function displaySearchResults(query) {
+            // 在这里处理搜索结果逻辑，模拟搜索结果的展示
+            const resultContainer = document.getElementById('results');
+            resultContainer.textContent = '搜索内容: ' + query;
+
+            // 这里可以插入实际的搜索逻辑，比如渲染视频嵌入、API请求等
+        }
+
+        // 确保在加载时调用handleSearchQuery
+        window.onload = handleSearchQuery;
     </script>
 </head>
 <body>
