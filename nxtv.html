@@ -1,0 +1,30 @@
+<script language="javascript">
+var xmlhttp;
+if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest()
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+    }
+    xmlhttp.onreadystatechange = function() {
+        if(xmlhttp.readyState==4 && xmlhttp.status==200){
+        var data=xmlhttp.responseText;
+        var datas=data.split('now_play="1"')[0];
+        var reg=/url="(.*?)"/g;
+        urls=datas.match(reg);
+        num= urls.length;
+        m3u8=urls[num-1].replace('url=','').replace(/"/g,'');
+        //document.write(ss)
+        location.href=m3u8;//此处可添加播放器，如： location.href=‘?vurl=’+encodeURIComponent(m3u8);
+    }
+}
+var vid=location.href.split('html?id=')[1];
+if(vid=='nxws'){uid='6'}
+if(vid=='ggpd'){uid='5'}
+if(vid=='jjpd'){uid='7'}
+if(vid=='sepd'){uid='28'}
+if(vid=='yspd'){uid='29'}
+var url = 'http://www.nxtv.com.cn/m2o/player/program_xml.php?channel_id='+uid;
+xmlhttp.open("get", url, true);
+xmlhttp.send();
+// m2o/program_switch.php  nxtv.html?id=yspd
+</script>
